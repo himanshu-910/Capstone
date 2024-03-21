@@ -1,0 +1,162 @@
+package Capstone;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class VerifyDropdown {
+WebDriver driver;
+    
+    @Before
+    public void launchApp() throws Exception {
+        
+        
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F");
+        Thread.sleep(3000);
+    }
+
+    
+    @After
+    public void CloseApp() throws Exception {
+        
+        
+        Thread.sleep(3000);
+        driver.close();
+        driver.quit();
+    }
+    
+    
+    @Test
+    public void verifyTitle() throws Exception {
+        
+        //Enter username
+        WebElement userid = driver.findElement(By.xpath("//input[@id='Email']"));
+        Thread.sleep(3000);
+        
+        userid.clear();
+        userid.sendKeys("admin@yourstore.com");
+        
+        
+        //Enter password
+        WebElement password = driver.findElement(By.xpath("//input[@id='Password']"));
+        Thread.sleep(3000);
+        
+        password.clear();
+        password.sendKeys("admin");
+        
+        Thread.sleep(3000);
+        
+        //Login
+        WebElement loginbutton = driver.findElement(By.xpath("//button[contains(text(),'Log in')]"));
+        loginbutton.click();
+        
+        //Verifying
+        Thread.sleep(7000);
+        String expectedtitle = "Dashboard / nopCommerce administration";
+        String ActualTitle=	driver.getTitle();
+        
+        Assert.assertEquals(ActualTitle, expectedtitle);
+        
+        
+        Actions ac = new Actions(driver);
+        
+        Thread.sleep(3000);
+        WebElement promotionbtn = driver.findElement(By.xpath("//p[contains(text(),'Promotions')]//i"));
+        
+      
+        ac.moveToElement(promotionbtn).click().perform();
+        
+        //Verifying Promotion Dropdown
+        Thread.sleep(5000);
+        WebElement promotionbtn1 = driver.findElement(By.xpath("(//a[@href='/Admin/Discount/List'])[1]"));
+        promotionbtn1.click();
+        
+        Thread.sleep(5000);
+        
+        String expectedtitle1 = "Discounts / nopCommerce administration";
+        String ActualTitle1=	driver.getTitle();
+        
+        
+        Assert.assertEquals(ActualTitle1, expectedtitle1);
+        
+        
+        Thread.sleep(5000);
+        WebElement promotionbtn2 = driver.findElement(By.xpath("(//a[@href='/Admin/Affiliate/List'])[1]"));
+        promotionbtn2.click();
+        
+        Thread.sleep(5000);
+        
+        String expectedtitle2 = "Affiliates / nopCommerce administration";
+        String ActualTitle2=	driver.getTitle();
+        
+        
+        Assert.assertEquals(ActualTitle2, expectedtitle2);
+        
+        
+        Thread.sleep(5000);
+        WebElement promotionbtn3 = driver.findElement(By.xpath("(//a[@href='/Admin/NewsLetterSubscription/List'])[1]"));
+        promotionbtn3.click();
+        
+        Thread.sleep(5000);
+        
+        String expectedtitle3 = "Newsletter subscribers / nopCommerce administration";
+        String ActualTitle3=	driver.getTitle();
+        
+        
+        Assert.assertEquals(ActualTitle3, expectedtitle3);
+        
+        
+        
+        Thread.sleep(5000);
+        WebElement promotionbtn4 = driver.findElement(By.xpath("(//a[@href='/Admin/Campaign/List'])[1]"));
+        promotionbtn4.click();
+        
+        Thread.sleep(5000);
+        
+        String expectedtitle4 = "Campaigns / nopCommerce administration";
+        String ActualTitle4=	driver.getTitle();
+        
+        
+        Assert.assertEquals(ActualTitle4, expectedtitle4);
+        
+        
+        System.out.println("DropDown Verified");
+        
+        
+        
+//        Thread.sleep(3000);
+//        WebElement customerbtn = driver.findElement(By.xpath("//p[contains(text(),'Customers')]//i"));
+//        
+//      
+//        ac.moveToElement(customerbtn).click().perform();
+        
+        
+//        Thread.sleep(5000);
+//        WebElement customerbtn1 = driver.findElement(By.xpath("(//a[@href='/Admin/Customer/List'])[1]"));
+//        customerbtn1.click();
+//        
+//        
+//        Thread.sleep(5000);
+//        driver.findElement(By.xpath("//a[@href='/Admin/Customer/Create']")).click();
+      
+        
+//        Thread.sleep(5000);
+//        
+//        String expectedtitle1 = "Add a new customer / nopCommerce administration";
+//        String ActualTitle1=	driver.getTitle();
+//        
+//        
+//        Assert.assertEquals(ActualTitle1, expectedtitle1);
+        
+        
+    }
+
+}
